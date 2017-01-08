@@ -40,9 +40,9 @@ module.exports = function (grunt) {
                         expand:  true,
                         flatten: true,
                         src:     [
-                            srcDir + 'controller.js',
-                            srcDir + 'package.json',
-                            srcDir + 'io-package.json'
+                                srcDir + 'controller.js',
+                                srcDir + 'package.json',
+                                srcDir + 'io-package.json'
                         ],
                         dest:    srcDir
                     }
@@ -99,6 +99,22 @@ module.exports = function (grunt) {
                             srcDir + 'www/*.*'
                         ],
                         dest:    srcDir + 'www'
+                    },
+                    {
+                        expand:  true,
+                        flatten: true,
+                        src:     [
+                            srcDir + 'test/*.*'
+                        ],
+                        dest:    srcDir + 'test'
+                    },
+                    {
+                        expand:  true,
+                        flatten: true,
+                        src:     [
+                            srcDir + 'test/lib/*.*'
+                        ],
+                        dest:    srcDir + 'test/lib'
                     }
                 ]
             }
@@ -119,12 +135,6 @@ module.exports = function (grunt) {
                     url: 'https://raw.githubusercontent.com/' + appName + '/' + appName + '.js-controller/master/tasks/jshint.js'
                 },
                 dest: 'tasks/jshint.js'
-            },
-            get_gruntfile: {
-                options: {
-                    url: 'https://raw.githubusercontent.com/' + appName + '/' + appName + '.build/master/adapters/Gruntfile.js'
-                },
-                dest: 'Gruntfile.js'
             },
             get_utilsfile: {
                 options: {

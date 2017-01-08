@@ -76,7 +76,7 @@ function stop(callback) {
         adapter.log.info('stopping...');
     }
     setTimeout(function () {
-        process.exit()
+        process.exit();
     }, 1000);
 
     if (typeof callback === 'function') callback();
@@ -691,7 +691,7 @@ function sayItChromecast(text, language, volume, duration) {
     //Create announcement JSON
     var announcement = {
 	url: webLink + '/state/' + adapter.namespace + '.tts.mp3'
-    }
+    };
     if (volume) {
       announcement.volume = volume;
     }
@@ -1245,10 +1245,11 @@ function uploadFiles(callback) {
         var files = libs.fs.readdirSync(__dirname + '/mp3');
 
         var count = files.length;
+        var uploadFileCallback = function () {
+            if (!--count && callback) callback();
+        };
         for (var f = 0; f < files.length; f++) {
-            uploadFile(files[f], function () {
-                if (!--count && callback) callback();
-            });
+            uploadFile(files[f], uploadFileCallback);
         }
 
         return;
@@ -1376,7 +1377,7 @@ function start() {
 
     if ((adapter.config.type === 'sonos') ||
         (adapter.config.type === 'chromecast') ||
-        (adapter.config.type === 'mpd')){
+        (adapter.config.type === 'mpd')) {
         adapter.getForeignObject('system.adapter.' + adapter.config.web, function (err, obj) {
             if (!err && obj && obj.native) {
                 webLink = 'http';
